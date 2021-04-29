@@ -1,0 +1,1 @@
+In this project, I design a relational model to store data for the COVID-19 vaccination program. An ER model of the database is available in this directory. The database is created using DB2 and tested by adding toy data and SQL queries. I also wrote a Java application, also available in this directory, to interact with the database. 
