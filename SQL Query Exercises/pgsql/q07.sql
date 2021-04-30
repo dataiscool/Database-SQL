@@ -1,0 +1,12 @@
+SELECT DISTINCT pname, employeeid
+FROM Documentauthors, Document
+WHERE Documentauthors.documentid = Document.documentid
+EXCEPT -- GET DEVS WHO AUTHORED A DOCUMENT (SUBTRACT) DEVS WHO WERE ASSIGNED TO PROJECTS. SAME COMBINATIONS (IE DEV WHO AUTHORED A DOCUMENT AND IS ASSIGNED TO THAT PROJ)  ARE DELETED
+SELECT DISTINCT pname, employeeid
+FROM Devassignments
+
+--NOT EXISTS (SELECT Devassignments.employeeid
+	--	FROM Devassignments -- WRONG, THE PNAME WILL ALWAYS EXIST BECAUSE IT CAN BE ASSIGNED ELSEWHERE NOT LINKED TO THE DEV, NEED TO USE DIFF?
+--	WHERE Devassignments.pname = Document.pname)
+ORDER BY pname, employeeid
+;

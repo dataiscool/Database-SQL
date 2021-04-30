@@ -1,0 +1,298 @@
+CREATE TABLE project
+(
+pname VARCHAR(30) NOT NULL
+  ,pstartdate DATE NOT NULL
+,ptype VARCHAR(15) NOT NULL
+,budget INTEGER NOT NULL
+  ,PRIMARY KEY (pname)
+);
+ERROR:  relation "project" already exists
+CREATE TABLE developer
+(
+  employeeid INTEGER NOT NULL
+  ,ename VARCHAR(30) NOT NULL
+  ,PRIMARY KEY (employeeid)
+);
+ERROR:  relation "developer" already exists
+CREATE TABLE document
+(
+ documentid INTEGER NOT NULL
+  ,dname VARCHAR(50) NOT NULL
+  ,publishdate DATE NOT NULL
+,pname VARCHAR(30) NOT NULL
+  ,PRIMARY KEY (documentid)
+  ,FOREIGN KEY(pname) REFERENCES project(pname)
+);
+ERROR:  relation "document" already exists
+CREATE TABLE devassignments
+(
+   employeeid INTEGER NOT NULL
+,pname VARCHAR(30) NOT NULL
+  ,asgndate DATE NOT NULL
+  ,PRIMARY KEY(employeeid,pname)
+  ,FOREIGN KEY(employeeid) REFERENCES developer(employeeid)
+  ,FOREIGN KEY(pname) REFERENCES project(pname)
+);
+ERROR:  relation "devassignments" already exists
+CREATE TABLE documentauthors
+(
+   employeeid INTEGER NOT NULL
+  ,documentid INTEGER NOT NULL
+  ,PRIMARY KEY (employeeid, documentid)
+  ,FOREIGN KEY(employeeid) REFERENCES developer(employeeid)
+  ,FOREIGN KEY(documentid) REFERENCES document(documentid)
+);
+ERROR:  relation "documentauthors" already exists
+INSERT INTO project VALUES('Charles', '2019-12-08', 'internal', 6300000);
+ERROR:  duplicate key value violates unique constraint "project_pkey"
+DETAIL:  Key (pname)=(Charles) already exists.
+INSERT INTO project VALUES('Otters', '2020-05-13', 'internal', 46100000);
+ERROR:  duplicate key value violates unique constraint "project_pkey"
+DETAIL:  Key (pname)=(Otters) already exists.
+INSERT INTO project VALUES('Kodiak', '2020-05-20', 'external', 50000000);
+ERROR:  duplicate key value violates unique constraint "project_pkey"
+DETAIL:  Key (pname)=(Kodiak) already exists.
+INSERT INTO project VALUES('Capybara', '2020-08-22', 'external', 19500000);
+ERROR:  duplicate key value violates unique constraint "project_pkey"
+DETAIL:  Key (pname)=(Capybara) already exists.
+INSERT INTO project VALUES('Snowy', '2021-01-12', 'external', 4500000);
+ERROR:  duplicate key value violates unique constraint "project_pkey"
+DETAIL:  Key (pname)=(Snowy) already exists.
+INSERT INTO project VALUES('Albatrose', '2021-01-20', 'internal', 3500000);
+ERROR:  duplicate key value violates unique constraint "project_pkey"
+DETAIL:  Key (pname)=(Albatrose) already exists.
+INSERT INTO project VALUES('Haddock', '2021-01-23', 'external', 2400000);
+ERROR:  duplicate key value violates unique constraint "project_pkey"
+DETAIL:  Key (pname)=(Haddock) already exists.
+INSERT INTO project VALUES('Walleye', '2021-01-23', 'internal', 12000000);
+ERROR:  duplicate key value violates unique constraint "project_pkey"
+DETAIL:  Key (pname)=(Walleye) already exists.
+INSERT INTO developer VALUES(81532, 'May Owens');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(81532) already exists.
+INSERT INTO developer VALUES(82102, 'Milly Fulton');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(82102) already exists.
+INSERT INTO developer VALUES(82453, 'Tom Smith');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(82453) already exists.
+INSERT INTO developer VALUES(85473, 'Bob Williams');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(85473) already exists.
+INSERT INTO developer VALUES(87634, 'Alice Kay');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(87634) already exists.
+INSERT INTO developer VALUES(87642, 'Jane Doe');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(87642) already exists.
+INSERT INTO developer VALUES(89374, 'Isabel Lee');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(89374) already exists.
+INSERT INTO developer VALUES(90234, 'Melanie Carson');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(90234) already exists.
+INSERT INTO developer VALUES(91243, 'Emery Woods');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(91243) already exists.
+INSERT INTO developer VALUES(93401, 'Zara Haas');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(93401) already exists.
+INSERT INTO developer VALUES(93752, 'John Doe');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(93752) already exists.
+INSERT INTO developer VALUES(94857, 'Issac Harrison');
+ERROR:  duplicate key value violates unique constraint "developer_pkey"
+DETAIL:  Key (employeeid)=(94857) already exists.
+INSERT INTO developer VALUES(98868, 'Jon Test');
+INSERT 0 1
+INSERT INTO devassignments VALUES(82102, 'Charles', '2019-12-08');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(82102, Charles) already exists.
+INSERT INTO devassignments VALUES(82453, 'Charles', '2019-12-08');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(82453, Charles) already exists.
+INSERT INTO devassignments VALUES(87634, 'Charles', '2020-02-04');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(87634, Charles) already exists.
+INSERT INTO devassignments VALUES(93401, 'Otters', '2020-05-13');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(93401, Otters) already exists.
+INSERT INTO devassignments VALUES(93752, 'Otters', '2020-05-13');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(93752, Otters) already exists.
+INSERT INTO devassignments VALUES(89374, 'Otters', '2020-08-01');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(89374, Otters) already exists.
+INSERT INTO devassignments VALUES(82102, 'Kodiak', '2020-06-07');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(82102, Kodiak) already exists.
+INSERT INTO devassignments VALUES(87642, 'Kodiak', '2020-06-07');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(87642, Kodiak) already exists.
+INSERT INTO devassignments VALUES(82453, 'Kodiak', '2020-08-04');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(82453, Kodiak) already exists.
+INSERT INTO devassignments VALUES(81532, 'Kodiak', '2020-08-04');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(81532, Kodiak) already exists.
+INSERT INTO devassignments VALUES(91243, 'Kodiak', '2020-08-04');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(91243, Kodiak) already exists.
+INSERT INTO devassignments VALUES(81532, 'Capybara', '2020-09-13');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(81532, Capybara) already exists.
+INSERT INTO devassignments VALUES(94857, 'Capybara', '2020-10-14');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(94857, Capybara) already exists.
+INSERT INTO devassignments VALUES(87634, 'Snowy', '2021-01-13');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(87634, Snowy) already exists.
+INSERT INTO devassignments VALUES(89374, 'Snowy', '2021-01-19');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(89374, Snowy) already exists.
+INSERT INTO devassignments VALUES(93752, 'Albatrose', '2021-01-21');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(93752, Albatrose) already exists.
+INSERT INTO devassignments VALUES(82453, 'Albatrose', '2021-01-29');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(82453, Albatrose) already exists.
+INSERT INTO devassignments VALUES(81532, 'Walleye', '2021-01-25');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(81532, Walleye) already exists.
+INSERT INTO devassignments VALUES(93401, 'Walleye', '2021-01-25');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(93401, Walleye) already exists.
+INSERT INTO devassignments VALUES(90234, 'Walleye', '2021-01-28');
+ERROR:  duplicate key value violates unique constraint "devassignments_pkey"
+DETAIL:  Key (employeeid, pname)=(90234, Walleye) already exists.
+INSERT INTO document VALUES(1, 'Proposal', '2019-12-08', 'Charles');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(1) already exists.
+INSERT INTO document VALUES(4, 'Implementation Design', '2020-01-20', 'Charles');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(4) already exists.
+INSERT INTO document VALUES(9, 'Evaluation', '2020-04-20', 'Charles');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(9) already exists.
+INSERT INTO document VALUES(12, 'Case Study', '2020-05-17', 'Otters');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(12) already exists.
+INSERT INTO document VALUES(17, 'Alternative Approach', '2020-07-28', 'Otters');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(17) already exists.
+INSERT INTO document VALUES(19, 'Project Summary', '2020-09-15', 'Otters');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(19) already exists.
+INSERT INTO document VALUES(21, 'External Requests', '2020-07-11', 'Kodiak');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(21) already exists.
+INSERT INTO document VALUES(22, 'System Test Cases', '2020-09-21', 'Kodiak');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(22) already exists.
+INSERT INTO document VALUES(23, 'Architectural Modification', '2020-10-25', 'Kodiak');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(23) already exists.
+INSERT INTO document VALUES(27, 'Performance Evaluation', '2020-11-30', 'Kodiak');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(27) already exists.
+INSERT INTO document VALUES(29, 'Case Study', '2020-08-22', 'Capybara');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(29) already exists.
+INSERT INTO document VALUES(33, 'Implementation Design', '2020-11-01', 'Capybara');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(33) already exists.
+INSERT INTO document VALUES(39, 'Modified Requirements', '2021-02-01', 'Snowy');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(39) already exists.
+INSERT INTO document VALUES(45, 'Initial Proposal', '2021-01-22', 'Albatrose');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(45) already exists.
+INSERT INTO document VALUES(47, 'Design Details', '2021-02-01', 'Albatrose');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(47) already exists.
+INSERT INTO document VALUES(51, 'Proposal', '2021-01-23', 'Walleye');
+ERROR:  duplicate key value violates unique constraint "document_pkey"
+DETAIL:  Key (documentid)=(51) already exists.
+INSERT INTO documentauthors VALUES(82102,1);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82102, 1) already exists.
+INSERT INTO documentauthors VALUES(81532,1);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(81532, 1) already exists.
+INSERT INTO documentauthors VALUES(82102,4);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82102, 4) already exists.
+INSERT INTO documentauthors VALUES(82453,4);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82453, 4) already exists.
+INSERT INTO documentauthors VALUES(82102,9);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82102, 9) already exists.
+INSERT INTO documentauthors VALUES(82453,9);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82453, 9) already exists.
+INSERT INTO documentauthors VALUES(87634,9);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(87634, 9) already exists.
+INSERT INTO documentauthors VALUES(93401,12);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(93401, 12) already exists.
+INSERT INTO documentauthors VALUES(93401,17);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(93401, 17) already exists.
+INSERT INTO documentauthors VALUES(93401,19);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(93401, 19) already exists.
+INSERT INTO documentauthors VALUES(89374,19);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(89374, 19) already exists.
+INSERT INTO documentauthors VALUES(82102,21);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82102, 21) already exists.
+INSERT INTO documentauthors VALUES(82102,22);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82102, 22) already exists.
+INSERT INTO documentauthors VALUES(93401,22);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(93401, 22) already exists.
+INSERT INTO documentauthors VALUES(93401,23);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(93401, 23) already exists.
+INSERT INTO documentauthors VALUES(90234,23);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(90234, 23) already exists.
+INSERT INTO documentauthors VALUES(82102,27);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82102, 27) already exists.
+INSERT INTO documentauthors VALUES(82453,27);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82453, 27) already exists.
+INSERT INTO documentauthors VALUES(87642,27);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(87642, 27) already exists.
+INSERT INTO documentauthors VALUES(91243,29);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(91243, 29) already exists.
+INSERT INTO documentauthors VALUES(81532,33);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(81532, 33) already exists.
+INSERT INTO documentauthors VALUES(94857,33);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(94857, 33) already exists.
+INSERT INTO documentauthors VALUES(93401,39);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(93401, 39) already exists.
+INSERT INTO documentauthors VALUES(82453,45);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82453, 45) already exists.
+INSERT INTO documentauthors VALUES(82453,47);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(82453, 47) already exists.
+INSERT INTO documentauthors VALUES(93752,47);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(93752, 47) already exists.
+INSERT INTO documentauthors VALUES(90234,51);
+ERROR:  duplicate key value violates unique constraint "documentauthors_pkey"
+DETAIL:  Key (employeeid, documentid)=(90234, 51) already exists.
+INSERT INTO documentauthors VALUES(98868,51);
+INSERT 0 1
